@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-JmcEstoqueApplication<jmc-estoque>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "br.com.jairinho.jmc_estoque.JmcEstoqueApplication",
+            "projectName": "jmc-estoque",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

@@ -19,6 +19,6 @@ public class Produto {
     private String referencia;
     private String nome;
     private Double preco;
-    private Integer quantidade;
+    private Integer marca;
 
 }

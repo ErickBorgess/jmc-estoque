@@ -40,20 +40,19 @@ public class DadosCSV {
                         .marca(linha[5])
                         .build();
                     produtos.add(produto);
-                    produtoRepository.save(produto);
                 } catch (Exception e) {
                     System.out.println("Erro ao processar linha: " + String.join(", ", linha));
                 }
             }
-            return produtos;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+        return produtos;
     }
 
     public void salvarProdutos(){
-        List<Produto> produtos = lerCSV();
+        List<Produto> produtos = this.lerCSV();
         if (produtos != null && !produtos.isEmpty()) {
             System.out.println("Limpando produtos existentes...");
             produtoRepository.deleteAllInBatch();

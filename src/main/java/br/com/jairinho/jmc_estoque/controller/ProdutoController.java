@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import br.com.jairinho.jmc_estoque.model.Produto;
 import br.com.jairinho.jmc_estoque.repository.ProdutoRepository;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 

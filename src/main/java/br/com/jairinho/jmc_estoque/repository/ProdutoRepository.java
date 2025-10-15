@@ -2,7 +2,6 @@ package br.com.jairinho.jmc_estoque.repository;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import br.com.jairinho.jmc_estoque.model.Produto;
 

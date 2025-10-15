@@ -18,8 +18,8 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int codigoBarras;
-    private int codigoSistema;
+    private String codigoBarras;
+    private String codigoSistema;
     private String referencia;
     private String nome;
     private Double preco;

@@ -60,11 +60,16 @@ const buscarPorNome = async () => {
 };
 
 const buscarPorCodigoEan = async () => {
-    const valor = inputCodigo.value.trim();
+    const valor = inputCodigoEan.value.trim();
     if (!valor) { mostrarFeedback('Por favor, digite um código para buscar.'); return; }
     // Regex para verificar se o código é um código de barras (12 ou 13 dígitos)
     let endpoint = '';
-    if(/^\d{12,13}$/.test(valor)) {endpoint = `/buscaean?codigoBarras=${valor}`}
+    if(/^\d{12,13}$/.test(valor)) {
+        endpoint = `/buscaean?codigoBarras=${valor}`
+    } else {
+        mostrarFeedback('Por favor, digite um código de barras válido (12 ou 13 dígitos).');
+        return;
+    }
     const resultado = await fetchData(endpoint);
     if (resultado.success) exibirResultados(resultado.data);
     else mostrarFeedback(resultado.message);

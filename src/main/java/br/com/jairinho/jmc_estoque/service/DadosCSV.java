@@ -54,7 +54,7 @@ public class DadosCSV {
                     produtos.add(produto);
                     produtosValidos++;
                 } catch (NumberFormatException e) {
-                    System.err.println("ERRO: Valor numérico inválido na linha " + linhaAtual + ". Produto ignorado.");
+                    //System.err.println("ERRO: Valor numérico inválido na linha " + linhaAtual + ". Produto ignorado.");
                     linhasInvalidas++;
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.err.println("ERRO: Número de colunas incorreto na linha " + linhaAtual + ". Produto ignorado.");

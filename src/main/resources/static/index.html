@@ -20,11 +20,11 @@
         }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-[#0B2559] text-gray-800">
     <div class="container mx-auto p-4 max-w-3xl">
         <header class="text-center my-6">
-            <h1 class="text-4xl font-bold text-blue-600">Catálogo Jairinho</h1>
-            <p class="text-gray-600 mt-2">Jairinho Materiais de Construção</p>
+            <h1 class="text-4xl font-bold text-[#F4D404]">Catálogo Jairinho</h1>
+            <p class="text-[#F4D404] mt-2 font-bold">Jairinho Materiais de Construção</p>
         </header>
 
         <main>
@@ -35,21 +35,28 @@
                         <label for="buscaNome" class="block text-sm font-medium text-gray-700">Por Nome</label>
                         <div class="mt-1 flex rounded-md shadow-sm">
                             <input type="text" id="buscaNome" class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border-gray-300 p-2" placeholder="Ex: Bloco, Cimento...">
-                            <button onclick="buscarPorNome()" class="bg-blue-600 text-white px-4 py-2 rounded-r-md hover:bg-blue-700 font-semibold">Buscar</button>
+                            <button onclick="buscarPorNome()" id="btnBuscaNome" class="bg-blue-600 text-white px-4 py-2 rounded-r-md hover:bg-blue-700 font-semibold">Buscar</button>
                         </div>
                     </div>
                     <div>
-                        <label for="buscaCodigo" class="block text-sm font-medium text-gray-700">Por Código (Sistema ou Barras)</label>
+                        <label for="buscaEan" class="block text-sm font-medium text-gray-700">Por Código de Barras</label>
                          <div class="mt-1 flex rounded-md shadow-sm">
-                            <input type="text" id="buscaCodigo" class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border-gray-300 p-2" placeholder="Digite ou leia o código">
-                            <button onclick="buscarPorCodigo()" class="bg-blue-600 text-white px-4 py-2 rounded-r-md hover:bg-blue-700 font-semibold">Buscar</button>
+                            <input type="text" id="buscaCodigoEan" class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border-gray-300 p-2" placeholder="Digite ou leia o código de Barras">
+                            <button onclick="buscarPorCodigoEan()" id="btnBuscaCodigoEan" class="bg-blue-600 text-white px-4 py-2 rounded-r-md hover:bg-blue-700 font-semibold">Buscar</button>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="buscaCodigo" class="block text-sm font-medium text-gray-700">Por Código do Sistema</label>
+                         <div class="mt-1 flex rounded-md shadow-sm">
+                            <input type="text" id="buscaCodigo" class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border-gray-300 p-2" placeholder="Digite o código do sistema">
+                            <button onclick="buscarPorCodigo()" id="btnBuscaCodigo" class="bg-blue-600 text-white px-4 py-2 rounded-r-md hover:bg-blue-700 font-semibold">Buscar</button>
                         </div>
                     </div>
                      <div>
                         <label for="buscaRef" class="block text-sm font-medium text-gray-700">Por Referência</label>
                          <div class="mt-1 flex rounded-md shadow-sm">
                             <input type="text" id="buscaRef" class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border-gray-300 p-2" placeholder="Ex: 61211">
-                            <button onclick="buscarPorReferencia()" class="bg-blue-600 text-white px-4 py-2 rounded-r-md hover:bg-blue-700 font-semibold">Buscar</button>
+                            <button onclick="buscarPorReferencia()" id="btnBuscaRef" class="bg-blue-600 text-white px-4 py-2 rounded-r-md hover:bg-blue-700 font-semibold">Buscar</button>
                         </div>
                     </div>
                 </div>
@@ -63,6 +70,6 @@
 
         </main>
     </div>
-    <script src="/src/main/resources/static/script/script.js"></script>
+    <script src="script/script.js"></script>
 </body>
 </html>

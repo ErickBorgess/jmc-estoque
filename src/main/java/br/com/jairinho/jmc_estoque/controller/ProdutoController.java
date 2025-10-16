@@ -35,7 +35,7 @@ public class ProdutoController {
 
     @GetMapping("/buscacod")
     public ResponseEntity<Produto> buscarPorCodigoSistema(@RequestParam String codigo) {
-        return produtoRepository.findByCodigoSistema(codigo)
+        return produtoRepository.findByCodigoSistemaFlexible(codigo)
                 .map(produto -> ResponseEntity.ok(produto))
                 .orElse(ResponseEntity.notFound().build());
     }

@@ -1,5 +1,5 @@
 // --- CONFIGURAÇÃO ---
-const API_BASE_URL = 'http://localhost:8080/produtos';
+const API_BASE_URL = '/produtos';
 
 // --- ELEMENTOS DA PÁGINA ---
 const resultadosDiv = document.getElementById('resultados');

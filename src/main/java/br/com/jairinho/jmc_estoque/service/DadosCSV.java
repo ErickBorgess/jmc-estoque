@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Service
 @NoArgsConstructor
 public class DadosCSV {
-    private static final String ARQUIVO_CSV = "src/main/resources/produtos.csv";
+    private static final String ARQUIVO_CSV = "src/main/resources/produtos1810.csv";
     
     @Autowired
     private ProdutoRepository produtoRepository;

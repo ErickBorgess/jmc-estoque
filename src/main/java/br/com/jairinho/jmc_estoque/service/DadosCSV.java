@@ -1,7 +1,7 @@
 package br.com.jairinho.jmc_estoque.service;
 
-import java.io.FileReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,38 +14,46 @@ import lombok.NoArgsConstructor;
 @Service
 @NoArgsConstructor
 public class DadosCSV {
-    private static final String ARQUIVO_CSV = "src/main/resources/produtos1810.csv";
-    
+    private static final String ARQUIVO_CSV = "produtos2710.csv";
+
     @Autowired
     private ProdutoRepository produtoRepository;
 
     public List<Produto> lerCSV() {
         List<Produto> produtos = new ArrayList<>();
 
-        try (CSVReader reader = new CSVReader(new FileReader(ARQUIVO_CSV))) {
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(ARQUIVO_CSV);
+                CSVReader reader = new CSVReader(new InputStreamReader(inputStream))) {
+
+            if (inputStream == null) {
+                System.err.println("ERRO FATAL: Não foi possível encontrar o arquivo CSV inicial: " + ARQUIVO_CSV);
+                return null;
+            }
+
             String[] linha;
-            //reader.readNext(); - Pular o cabeçalho do arquivo final
+            // reader.readNext(); - Pular o cabeçalho do arquivo final
             int linhaAtual = 0;
             int linhasInvalidas = 0;
             int produtosValidos = 0;
 
-            while((linha = reader.readNext()) != null) {
+            while ((linha = reader.readNext()) != null) {
                 linhaAtual++;
                 String codigoLimpo = linha[0].trim();
 
                 if (linha.length < 1 || linha[0] == null) {
-                    continue; 
+                    continue;
                 }
-                
+
                 if (codigoLimpo.isEmpty() && !codigoLimpo.matches("\\d+")) {
-                    System.out.println("INFO: Linha " + linhaAtual + " ignorada (código '" + linha[0] + "' não é um produto válido).");
+                    System.out.println("INFO: Linha " + linhaAtual + " ignorada (código '" + linha[0]
+                            + "' não é um produto válido).");
                     linhasInvalidas++;
                     continue;
                 }
 
                 try {
                     Produto produto = Produto.builder()
-                            .codigoSistema(codigoLimpo)        
+                            .codigoSistema(codigoLimpo)
                             .nome(linha[1] != null ? linha[1].trim() : "N/A")
                             .codigoBarras(linha[2] != null ? linha[2].trim() : "")
                             .referencia(linha[4] != null ? linha[4].trim() : "")
@@ -55,13 +63,15 @@ public class DadosCSV {
                     produtos.add(produto);
                     produtosValidos++;
                 } catch (NumberFormatException e) {
-                    //System.err.println("ERRO: Valor numérico inválido na linha " + linhaAtual + ". Produto ignorado.");
+                    // System.err.println("ERRO: Valor numérico inválido na linha " + linhaAtual +
+                    // ". Produto ignorado.");
                     linhasInvalidas++;
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.err.println("ERRO: Número de colunas incorreto na linha " + linhaAtual + ". Produto ignorado.");
+                    System.err.println(
+                            "ERRO: Número de colunas incorreto na linha " + linhaAtual + ". Produto ignorado.");
                     linhasInvalidas++;
                 }
-                
+
             }
             System.out.println("-----------------------------------------------------");
             System.out.println("Leitura do CSV finalizada.");
@@ -76,7 +86,7 @@ public class DadosCSV {
         return produtos;
     }
 
-    public void salvarProdutos(){
+    public void salvarProdutos() {
         List<Produto> produtos = this.lerCSV();
         if (produtos != null && !produtos.isEmpty()) {
             System.out.println("Limpando produtos existentes...");
@@ -98,23 +108,24 @@ public class DadosCSV {
             int linhasInvalidas = 0;
             int produtosValidos = 0;
 
-            while((linha = reader.readNext()) != null) {
+            while ((linha = reader.readNext()) != null) {
                 linhaAtual++;
                 String codigoLimpo = linha[0].trim();
 
                 if (linha.length < 1 || linha[0] == null) {
-                    continue; 
+                    continue;
                 }
-                
+
                 if (codigoLimpo.isEmpty() && !codigoLimpo.matches("\\d+")) {
-                    System.out.println("INFO: Linha " + linhaAtual + " ignorada (código '" + linha[0] + "' não é um produto válido).");
+                    System.out.println("INFO: Linha " + linhaAtual + " ignorada (código '" + linha[0]
+                            + "' não é um produto válido).");
                     linhasInvalidas++;
                     continue;
                 }
 
                 try {
                     Produto produto = Produto.builder()
-                            .codigoSistema(codigoLimpo)        
+                            .codigoSistema(codigoLimpo)
                             .nome(linha[1] != null ? linha[1].trim() : "N/A")
                             .codigoBarras(linha[2] != null ? linha[2].trim() : "")
                             .referencia(linha[4] != null ? linha[4].trim() : "")
@@ -126,10 +137,11 @@ public class DadosCSV {
                 } catch (NumberFormatException e) {
                     linhasInvalidas++;
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.err.println("ERRO: Número de colunas incorreto na linha " + linhaAtual + ". Produto ignorado.");
+                    System.err.println(
+                            "ERRO: Número de colunas incorreto na linha " + linhaAtual + ". Produto ignorado.");
                     linhasInvalidas++;
                 }
-                
+
             }
             System.out.println("-----------------------------------------------------");
             System.out.println("Leitura do CSV finalizada.");
@@ -144,7 +156,7 @@ public class DadosCSV {
         return produtos;
     }
 
-    public void salvarProdutosUpload(InputStream inputStream){
+    public void salvarProdutosUpload(InputStream inputStream) {
         List<Produto> produtos = this.lerCSVUpload(inputStream);
         if (produtos != null && !produtos.isEmpty()) {
             System.out.println("Limpando produtos existentes...");
@@ -156,5 +168,5 @@ public class DadosCSV {
             System.out.println("Nenhum produto para salvar.");
         }
     }
-    
+
 }

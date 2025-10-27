@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo Jairinho</title>
+    <link rel="icon" type="image/png" href="images/favicon.ico">
+    <link rel="manifest" href="images/site.webmanifest" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .loader {
+            border-top-color: #2563EB;
+            animation: spinner 1.5s linear infinite;
+        }
+        @keyframes spinner {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-[#0B2559] text-gray-800">
+    <div class="container mx-auto p-4 max-w-3xl">
+        <header class="text-center mt-3 mb-3 space-y-2">
+            <img src="images/logo-jmc.png" alt="Logo Jairinho" class=" mx-auto p-0 pb-3 size-1/2">
+            <h1 class="text-3xl font-bold text-[#F4D404]">CATÁLOGO</h1>
+        </header>
+
+        <main>
+            <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+                <h2 class="text-2xl font-semibold mb-5 border-b pb-3">Fazer Upload
+
+                </h2>
+                <div class="space-y-4">
+                    <div>
+                        <div class="mt-1 flex rounded-md shadow-sm">
+                            <button onclick="" id="btnBuscaNome" class="bg-blue-600 text-white px-4 py-2 rounded-r-md hover:bg-blue-700 font-semibold">Selecionar Arquivo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script/script.js"></script>
+    <script src="script/sw.js"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/script/sw.js')
+            .then(registration => {
+              console.log('Service Worker registrado com sucesso:', registration.scope);
+            })
+            .catch(error => {
+              console.log('Falha ao registrar o Service Worker:', error);
+            });
+        });
+      }
+    </script>
+</body>
+</html>

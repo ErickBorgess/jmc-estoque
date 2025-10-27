@@ -11,3 +11,6 @@ GET http://localhost:8080/produtos/buscacod?codigo=0000136
 
 ### Buscar produto por código de barras
 GET http://localhost:8080/produtos/buscaean?codigoBarras=7898059541123
+
+### Upload de arquivo
+POST http://localhost:8080/upload

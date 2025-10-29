@@ -17,7 +17,7 @@ public class FileStorageController {
     private final DadosCSV dadosCSV;
 
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadCSV(@RequestParam("file") MultipartFile file) {    
+    public ResponseEntity<String> uploadCSV(@RequestParam("file") MultipartFile file) {
         try {
             InputStream inputStream = file.getInputStream();
             dadosCSV.salvarProdutosUpload(inputStream);
@@ -27,6 +27,5 @@ public class FileStorageController {
             return ResponseEntity.status(500).body("Erro ao fazer upload do arquivo: " + e.getMessage());
         }
     }
-    
 
 }

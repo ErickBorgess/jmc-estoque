@@ -138,3 +138,29 @@ inputNome.addEventListener('keyup', e => e.key === 'Enter' && buscarPorNome());
 inputCodigoEan.addEventListener('keyup', e => e.key === 'Enter' && buscarPorCodigoEan());
 inputCodigo.addEventListener('keyup', e => e.key === 'Enter' && buscarPorCodigo());
 inputRef.addEventListener('keyup', e => e.key === 'Enter' && buscarPorReferencia());
+
+
+// --- FUNÇÃO PARA CARREGAR A DATA DE ATUALIZAÇÃO ---
+
+const carregarUltimaAtualizacao = async () => {
+    const updateElement = document.getElementById('last-update');
+    try {
+        const response = await fetch('/produtos/ultima-atualizacao');
+
+        if (response.ok) {
+            const dataTexto = await response.text();
+            updateElement.textContent = `Última atualização: ${dataTexto}`;
+        } else {
+            updateElement.textContent = 'Não foi possível carregar a data de atualização.';
+        }
+    } catch (error) {
+        console.error('Erro ao buscar data de atualização:', error);
+        updateElement.textContent = 'Erro de conexão ao buscar data.';
+    }
+};
+
+// --- EVENTO PARA EXECUTAR QUANDO A PÁGINA CARREGAR ---
+
+document.addEventListener('DOMContentLoaded', () => {
+    carregarUltimaAtualizacao();
+});

@@ -2,22 +2,22 @@ package br.com.jairinho.jmc_estoque.service;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import com.opencsv.CSVReader;
 import br.com.jairinho.jmc_estoque.model.Produto;
 import br.com.jairinho.jmc_estoque.repository.ProdutoRepository;
-import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 @Service
-@NoArgsConstructor
+@AllArgsConstructor
 public class DadosCSV {
     private static final String ARQUIVO_CSV = "produtos2710.csv";
 
-    @Autowired
-    private ProdutoRepository produtoRepository;
+    private final ProdutoRepository produtoRepository;
 
     public List<Produto> lerCSV() {
         List<Produto> produtos = new ArrayList<>();
@@ -31,7 +31,6 @@ public class DadosCSV {
             }
 
             String[] linha;
-            // reader.readNext(); - Pular o cabeçalho do arquivo final
             int linhaAtual = 0;
             int linhasInvalidas = 0;
             int produtosValidos = 0;
@@ -63,12 +62,9 @@ public class DadosCSV {
                     produtos.add(produto);
                     produtosValidos++;
                 } catch (NumberFormatException e) {
-                    // System.err.println("ERRO: Valor numérico inválido na linha " + linhaAtual +
-                    // ". Produto ignorado.");
                     linhasInvalidas++;
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.err.println(
-                            "ERRO: Número de colunas incorreto na linha " + linhaAtual + ". Produto ignorado.");
+                    System.err.println("ERRO: Número de colunas incorreto na linha " + linhaAtual + ". Produto ignorado.");
                     linhasInvalidas++;
                 }
 
@@ -86,11 +82,16 @@ public class DadosCSV {
         return produtos;
     }
 
+    @Transactional
     public void salvarProdutos() {
         List<Produto> produtos = this.lerCSV();
         if (produtos != null && !produtos.isEmpty()) {
             System.out.println("Limpando produtos existentes...");
             produtoRepository.deleteAllInBatch();
+
+            LocalDateTime data = LocalDateTime.now();
+            produtos.forEach(p -> p.setDataAtualizacao(data));
+
             System.out.println("Salvando " + produtos.size() + " produtos no banco de dados...");
             produtoRepository.saveAll(produtos);
             System.out.println("Produtos salvos com sucesso!");
@@ -156,13 +157,24 @@ public class DadosCSV {
         return produtos;
     }
 
+    @Transactional
     public void salvarProdutosUpload(InputStream inputStream) {
         List<Produto> produtos = this.lerCSVUpload(inputStream);
+
+        if (produtos == null) {
+            throw new RuntimeException("Falha ao ler o arquivo CSV. A transação será revertida.");
+        }
+
         if (produtos != null && !produtos.isEmpty()) {
             System.out.println("Limpando produtos existentes...");
             produtoRepository.deleteAllInBatch();
+
+            LocalDateTime data = LocalDateTime.now();
+            produtos.forEach(p -> p.setDataAtualizacao(data));
+
             System.out.println("Salvando " + produtos.size() + " produtos no banco de dados...");
             produtoRepository.saveAll(produtos);
+
             System.out.println("Produtos salvos com sucesso!");
         } else {
             System.out.println("Nenhum produto para salvar.");

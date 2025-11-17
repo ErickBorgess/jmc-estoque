@@ -1,5 +1,6 @@
 package br.com.jairinho.jmc_estoque.repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,4 +16,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
     Optional<Produto> findByCodigoSistemaFlexible(String codigoSistema);
     
     Optional<Produto> findByCodigoBarras(String codigoBarras);
+
+    @Query("SELECT MAX(p.dataAtualizacao) FROM Produto p")
+    Optional<LocalDateTime> getUltimaAtualizacao();
 }

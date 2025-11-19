@@ -15,8 +15,8 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # --- Estágio 2: Run (Execução) ---
-# Usamos uma imagem base do Java 17
-FROM openjdk:17-jdk-slim
+# Imagem base do Java 17
+FROM eclipse-temurin:17-jdk-jammy
 
 # Define o diretório de trabalho
 WORKDIR /app

@@ -23,7 +23,7 @@ public class JmcEstoqueApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		if (produtoRepository.count() == 0) {
-            System.out.println("Banco de dados vazio. Carregando 'produtos2710.csv'...");
+            System.out.println("Banco de dados vazio. Carregando CSV base...");
             dadosCSV.salvarProdutos();
         } else {
             System.out.println("Banco de dados preenchido.");

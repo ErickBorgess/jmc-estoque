@@ -1,6 +1,6 @@
 package br.com.jairinho.jmc_estoque.model;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,5 +25,5 @@ public class Produto {
     private String nome;
     private Double preco;
     private String marca;
-    private LocalDateTime dataAtualizacao;
+    private ZonedDateTime dataAtualizacao;
 }

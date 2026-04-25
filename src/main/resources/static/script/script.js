@@ -139,6 +139,12 @@ inputCodigoEan.addEventListener('keyup', e => e.key === 'Enter' && buscarPorCodi
 inputCodigo.addEventListener('keyup', e => e.key === 'Enter' && buscarPorCodigo());
 inputRef.addEventListener('keyup', e => e.key === 'Enter' && buscarPorReferencia());
 
+const limparBusca = () => {
+    inputNome.value = ''
+    inputCodigoEan.value = ''
+    inputCodigo.value = ''
+    inputRef.value = ''
+};
 
 // --- FUNÇÃO PARA CARREGAR A DATA DE ATUALIZAÇÃO ---
 

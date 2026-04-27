@@ -134,6 +134,7 @@ const limparBusca = () => {
     inputCodigoEan.value = ''
     inputCodigo.value = ''
     inputRef.value = ''
+    buscarPorNome("");
 };
 
 // --- EVENTOS DOS BOTÕES E TECLA ENTER ---

@@ -1,11 +1,11 @@
 package br.com.jairinho.jmc_estoque.service;
 
 import java.io.InputStream;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -84,7 +84,7 @@ public class DadosCSV {
             throw new RuntimeException("Falha ao ler o arquivo CSV. A transação será revertida.");
         }
 
-        ZonedDateTime dataAtual = ZonedDateTime.now(ZoneId.of("America/Sao_Paulo"));
+        LocalDateTime dataAtual = LocalDateTime.now();
 
         System.out.println("Processando " + produtos.size() + " produtos...");
 
@@ -96,13 +96,16 @@ public class DadosCSV {
 
         for (Produto prodNovo : produtos) {
             Produto prodExistente = bancoMap.get(prodNovo.getCodigoSistema());
-            if (prodExistente != null) {
-                prodExistente.setNome(prodNovo.getNome());
-                prodExistente.setCodigoBarras(prodNovo.getCodigoBarras());
-                prodExistente.setMarca(prodNovo.getMarca());
-                prodExistente.setPreco(prodNovo.getPreco());
 
-                produtosUpload.add(prodExistente);
+            if (prodExistente != null) {
+                if (houveMudanca(prodExistente, prodNovo)) {
+                    prodExistente.setNome(prodNovo.getNome());
+                    prodExistente.setCodigoBarras(prodNovo.getCodigoBarras());
+                    prodExistente.setMarca(prodNovo.getMarca());
+                    prodExistente.setPreco(prodNovo.getPreco());
+
+                    produtosUpload.add(prodExistente);
+                }
             } else {
                 produtosUpload.add(prodNovo);
             }
@@ -111,6 +114,13 @@ public class DadosCSV {
         produtosUpload.forEach(p -> p.setDataAtualizacao(dataAtual));
         System.out.println("Produtos atualizados com sucesso!");
         produtoRepository.saveAll(produtosUpload);
+    }
+
+    private boolean houveMudanca(Produto db, Produto csv) {
+        return !Objects.equals(db.getNome(), csv.getNome()) ||
+                !Objects.equals(db.getCodigoBarras(), csv.getCodigoBarras()) ||
+                !Objects.equals(db.getMarca(), csv.getMarca()) ||
+                Double.compare(db.getPreco(), csv.getPreco()) != 0;
     }
 
 }

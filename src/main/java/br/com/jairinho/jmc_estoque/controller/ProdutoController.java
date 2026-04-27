@@ -1,6 +1,6 @@
 package br.com.jairinho.jmc_estoque.controller;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
@@ -51,7 +51,7 @@ public class ProdutoController {
 
     @GetMapping("/ultima-atualizacao")
     public ResponseEntity<String> getUltimaAtualizacao() {
-        Optional<ZonedDateTime> dataOpcional = produtoRepository.getUltimaAtualizacao();
+        Optional<LocalDateTime> dataOpcional = produtoRepository.getUltimaAtualizacao();
 
         if (dataOpcional.isPresent()) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy 'às' HH:mm");
@@ -59,7 +59,7 @@ public class ProdutoController {
             return ResponseEntity.ok(dataFormatada);
         }
 
-        return ResponseEntity.ok("Dados ainda não carregados");
+        return ResponseEntity.ok("dados ainda não carregados");
     }
 
 }

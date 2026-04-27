@@ -11,6 +11,7 @@ const btnBuscaNome = document.getElementById('btnBuscaNome');
 const btnBuscaCodigoEan = document.getElementById('btnBuscaCodigoEan');
 const btnBuscaCodigo = document.getElementById('btnBuscaCodigo');
 const btnBuscaRef = document.getElementById('btnBuscaRef');
+const btnLimparBusca = document.getElementById('btnLimparBusca')
 
 // --- FUNÇÕES DE LÓGICA ---
 
@@ -128,17 +129,26 @@ const exibirResultados = (produtos) => {
     resultadosDiv.appendChild(lista);
 };
 
+const limparBusca = () => {
+    inputNome.value = ''
+    inputCodigoEan.value = ''
+    inputCodigo.value = ''
+    inputRef.value = ''
+    buscarPorNome("");
+};
+
 // --- EVENTOS DOS BOTÕES E TECLA ENTER ---
+
 btnBuscaNome.addEventListener('click', buscarPorNome);
 btnBuscaCodigoEan.addEventListener('click', buscarPorCodigoEan);
 btnBuscaCodigo.addEventListener('click', buscarPorCodigo);
 btnBuscaRef.addEventListener('click', buscarPorReferencia);
+btnLimparBusca.addEventListener('click', limparBusca);
 
 inputNome.addEventListener('keyup', e => e.key === 'Enter' && buscarPorNome());
 inputCodigoEan.addEventListener('keyup', e => e.key === 'Enter' && buscarPorCodigoEan());
 inputCodigo.addEventListener('keyup', e => e.key === 'Enter' && buscarPorCodigo());
 inputRef.addEventListener('keyup', e => e.key === 'Enter' && buscarPorReferencia());
-
 
 // --- FUNÇÃO PARA CARREGAR A DATA DE ATUALIZAÇÃO ---
 

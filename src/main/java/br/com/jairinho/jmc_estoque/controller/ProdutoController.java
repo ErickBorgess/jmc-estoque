@@ -59,7 +59,7 @@ public class ProdutoController {
             return ResponseEntity.ok(dataFormatada);
         }
 
-        return ResponseEntity.ok("Dados ainda não carregados");
+        return ResponseEntity.ok("dados ainda não carregados");
     }
 
 }

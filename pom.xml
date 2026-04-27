@@ -5,14 +5,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.5.7</version>
+		<version>3.5.14</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.jairinho</groupId>
 	<artifactId>jmc-estoque</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>jmc-estoque</name>
-	<description>PI para o catálogo de produtos da Jairinho Materiais de Construção</description>
+	<description>Catálogo de produtos da Jairinho Materiais de Construção</description>
 	<url/>
 	<licenses>
 		<license/>

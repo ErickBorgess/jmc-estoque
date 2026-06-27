@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calcular Cabos</title>
+    <title>Calcular Forro</title>
     <link rel="icon" type="image/png" href="images/favicon.ico">
     <link rel="manifest" href="images/site.webmanifest" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -36,44 +36,61 @@
 <body class="bg-[#0B2559] text-gray-800 align-middle"> ">
     <div class="container mx-auto p-4 max-w-3xl">
         <header class="text-center mt-3 mb-3 space-y-2">
-            <h1 class="text-3xl font-bold text-[WHITE]">CALCULADORA DE CABOS</h1>
+            <h1 class="text-3xl font-bold text-[WHITE]">CALCULADORA DE FORRO</h1>
             <div class="text-center mb-6 hidden md:block">
             </div>
         </header>
         <main>
             <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex flex-row space-x-4 mb-4">
+                    <button onclick="" id="btnComodo"
+                        class="w-full bg-[#F4D404] text-black px-4 py-2 rounded-md hover:bg-yellow-700 font-semibold">Calcular
+                        por m² do cômodo</button>
+                    <button onclick="" id="btnTalas"
+                        class="w-full bg-[#F4D404] text-black px-4 py-2 rounded-md hover:bg-yellow-700 font-semibold">Calcular
+                        por talas</button>
+                </div>
                 <div class="space-y-4 flex-1 columns-2">
-                    <div>
-                        <label for="kgAtual" class="block text-sm font-medium text-gray-700">Peso atual (kg)</label>
+                    <div id="metragem">
+                        <label for="kgAtual" class="block text-sm font-medium text-gray-700">METRAGEM</label>
                         <div class="mt-1 flex rounded-md shadow-sm">
                             <input type="text" id="pesoAtual"
                                 class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border-gray-300 p-2"
                                 placeholder="Iserir peso...">
                         </div>
+                        <div class="mt-6 mb-6">
+                            <button onclick="calcular()" id="btnCalcular"
+                                class="w-full bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 font-semibold">Calcular</button>
+                        </div>
+                        <div id="resultados" class="mb-4">
+                            <div id="feedback" class="text-center text-gray-500 py-10 bg-white rounded-lg shadow-md">
+                                <p>Realize algum calculo.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <label for="kgRolo" class="block text-sm font-medium text-gray-700">Peso do rolo (kg)</label>
+                    <div id="talas">
+                        <label for="kgRolo" class="block text-sm font-medium text-gray-700">TALAS</label>
                         <div class="mt-1 flex rounded-md shadow-sm">
                             <input type="text" id="pesoRolo"
                                 class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border-gray-300 p-2"
                                 placeholder="Iserir peso...">
                         </div>
-                    </div>
-                </div>
-                <div class="mt-6 mb-6">
-                    <button onclick="calcular()" id="btnCalcular"
-                        class="w-full bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 font-semibold">Calcular</button>
-                </div>
-                <div id="resultados" class="mb-4">
-                    <div id="feedback" class="text-center text-gray-500 py-10 bg-white rounded-lg shadow-md">
-                        <p>Realize algum calculo.</p>
+                        <div class="mt-6 mb-6">
+                            <button onclick="calcular()" id="btnCalcular"
+                                class="w-full bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 font-semibold">Calcular</button>
+                        </div>
+                        <div id="resultados" class="mb-4">
+                            <div id="feedback" class="text-center text-gray-500 py-10 bg-white rounded-lg shadow-md">
+                                <p>Realize algum calculo.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </main>
     </div>
     <script>
-        function calcular() {
+        /*function calcular() {
             const pesoAtual = parseFloat(document.getElementById('pesoAtual').value);
             const pesoRolo = parseFloat(document.getElementById('pesoRolo').value);
 
@@ -103,7 +120,25 @@
             lista.appendChild(card);
 
             resultadosDiv.appendChild(lista);
-        };
+        };*/
+        const btnComodo = document.querySelector("#btnComodo");
+        const btnTalas = document.querySelector("#btnTalas");
+        const metragem = document.querySelector("#metragem");
+        const talas = document.querySelector("#talas");
+
+        btnComodo.addEventListener("click", () => {
+            btnComodo.classList.add("active");
+            btnTalas.classList.remove("active");
+            metragem.style.display = "block";
+            talas.style.display = "none";
+        });
+
+        btnTalas.addEventListener("click", () => {
+            btnTalas.classList.add("active");
+            btnComodo.classList.remove("active");
+            metragem.style.display = "none";
+            talas.style.display = "block";
+        });
     </script>
 </body>
 

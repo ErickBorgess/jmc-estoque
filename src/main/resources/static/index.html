@@ -1,134 +1,238 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo Jairinho</title>
+    <title>JMC Estoque & Cálculos</title>
     <link rel="icon" type="image/png" href="images/favicon.ico">
     <link rel="manifest" href="images/site.webmanifest" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Configuração de cores personalizadas do Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        jmc: {
+                            blue: '#0A2540',
+                            orange: '#FF6600',
+                            orangeHover: '#E55C00',
+                            light: '#F8F9FA'
+                        }
+                    }
+                }
+            }
         }
-
+    </script>
+    
+    <style>
         .loader {
-            border-top-color: #2563EB;
+            border-top-color: #FF6600;
             animation: spinner 1.5s linear infinite;
         }
-
         @keyframes spinner {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 
-<body class="bg-[#0B2559] text-gray-800">
-    <div class="container mx-auto p-4 max-w-3xl">
-        <header class="text-center mt-3 mb-3 space-y-2">
-            <img src="images/logo-jmc.png" alt="Logo Jairinho" class=" mx-auto p-0 pb-3 size-1/2">
-            <div class="text-center mb-6 hidden md:block">
-                <a href="upload.html"
-                    class="text-lg bg-white text-blue hover:text-gray-300 font-medium transition-colors duration-200 border border-gray-300 px-2 py-1 rounded-lg mr-4">
-                    Upload CSV
+<body class="bg-jmc-light text-gray-800 antialiased">
+
+    <!-- NAVBAR -->
+    <nav class="bg-jmc-blue text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logo e Título -->
+                <div class="flex items-center gap-3">
+                    <img src="images/logo-jmc.png" alt="Logo Jairinho" class="h-12 w-auto object-contain rounded p-1">
+                    <span class="font-bold text-xl tracking-tight hidden md:block">Jairinho Materiais</span>
+                </div>
+                <!-- Menu Desktop -->
+                <div class="hidden md:flex items-center space-x-8 font-medium">
+                    <a href="#catalogo" class="hover:text-jmc-orange transition-colors">Catálogo</a>
+                    <a href="#ferramentas" class="hover:text-jmc-orange transition-colors">Calculadoras</a>
+                    <a href="funcoes/upload.html" class="bg-jmc-orange hover:bg-jmc-orangeHover text-white px-5 py-2 rounded-md transition-all shadow-md">Área Restrita</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="bg-jmc-blue relative overflow-hidden">
+        <!-- Overlay com textura/gradiente sutil para dar profundidade -->
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/40"></div>
+        
+        <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
+                O SEU CATÁLOGO COMPLETO E FERRAMENTAS DE CÁLCULO
+            </h1>
+            <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+                Acesse milhares de produtos com busca inteligente e utilize nossas calculadoras nativas para otimizar os orçamentos no balcão.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#catalogo" class="bg-jmc-orange hover:bg-jmc-orangeHover text-white font-bold py-3 px-8 rounded-md transition-all shadow-lg text-lg">
+                    Explorar Catálogo
                 </a>
-                <a href="cabos.html"
-                    class="text-lg bg-white text-blue hover:text-gray-300 font-medium transition-colors duration-200 border border-gray-300 px-2 py-1 rounded-lg mr-4">
-                    Calcular Cabos
-                </a>
-                <a href="forro.html"
-                    class="text-lg bg-white text-blue hover:text-gray-300 font-medium transition-colors duration-200 border border-gray-300 px-2 py-1 rounded-lg mr-4">
-                    Calcular Forro
+                <!--<a href="#orcamento" class="bg-jmc-orange hover:bg-jmc-orangeHover text-white font-bold py-3 px-8 rounded-md transition-all shadow-lg text-lg">
+                    Orçamento
+                </a>-->
+                <a href="#ferramentas" class="bg-jmc-orange bg hover:bg-white hover:text-jmc-blue text-white font-bold py-3 px-8 rounded-md transition-all text-lg">
+                    Acessar Ferramentas
                 </a>
             </div>
-            <h1 class="text-3xl font-bold text-[#F4D404]">CATÁLOGO</h1>
-        </header>
-        <main>
-            <div class="bg-white p-6 rounded-lg shadow-md mb-8">
-                <div class="flex justify-between items-baseline mb-5 border-b pb-3">
-                    <h2 class="text-2xl font-semibold">Buscar Produto</h2>
-                    <p id="last-update" class="text-sm text-gray-400">Carregando...</p>
+        </div>
+    </section>
+
+    <!-- CONTEÚDO PRINCIPAL (CATÁLOGO + FERRAMENTAS) -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+        
+        <!-- SEÇÃO: CATÁLOGO DE PRODUTOS -->
+        <section id="catalogo" class="scroll-mt-24">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-jmc-blue uppercase tracking-wide">Busca de Produtos</h2>
+                <div class="w-24 h-1 bg-jmc-orange mx-auto mt-3 rounded"></div>
+            </div>
+
+            <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg border border-gray-100 max-w-4xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-8 border-b pb-4 gap-2">
+                    <h3 class="text-xl font-semibold text-gray-800">Filtros de Pesquisa</h3>
+                    <p id="last-update" class="text-sm font-medium text-gray-500 bg-gray-50 px-3 py-1 rounded-full border">Carregando...</p>
                 </div>
-                <div class="space-y-4">
+
+                <!-- Grid de Inputs de Busca -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Por Nome -->
                     <div>
-                        <label for="buscaNome" class="block text-sm font-medium text-gray-700">Por Nome</label>
-                        <div class="mt-1 flex rounded-md shadow-sm">
-                            <input type="text" id="buscaNome"
-                                class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border-gray-300 p-2"
-                                placeholder="Ex: Bloco, Cimento...">
-                            <button onclick="buscarPorNome()" id="btnBuscaNome"
-                                class="bg-blue-600 text-white px-4 py-2 rounded-r-md hover:bg-blue-700 font-semibold">Buscar</button>
+                        <label for="buscaNome" class="block text-sm font-semibold text-gray-700 mb-1">Por Nome</label>
+                        <div class="flex rounded-md shadow-sm">
+                            <input type="text" id="buscaNome" class="focus:ring-jmc-blue focus:border-jmc-blue flex-1 block w-full rounded-l-md sm:text-sm border-gray-300 border p-2.5 outline-none" placeholder="Ex: Cimento, Bloco...">
+                            <button onclick="buscarPorNome()" id="btnBuscaNome" class="bg-jmc-blue text-white px-5 py-2.5 rounded-r-md hover:bg-opacity-90 font-semibold transition-colors">Buscar</button>
                         </div>
                     </div>
+
+                    <!-- Por EAN -->
                     <div>
-                        <label for="buscaEan" class="block text-sm font-medium text-gray-700">Por Código de
-                            Barras</label>
-                        <div class="mt-1 flex rounded-md shadow-sm">
-                            <input type="text" id="buscaCodigoEan"
-                                class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border-gray-300 p-2"
-                                placeholder="Digite ou leia o código de Barras">
-                            <button onclick="buscarPorCodigoEan()" id="btnBuscaCodigoEan"
-                                class="bg-blue-600 text-white px-4 py-2 rounded-r-md hover:bg-blue-700 font-semibold">Buscar</button>
+                        <label for="buscaCodigoEan" class="block text-sm font-semibold text-gray-700 mb-1">Por Código de Barras</label>
+                        <div class="flex rounded-md shadow-sm">
+                            <input type="text" id="buscaCodigoEan" class="focus:ring-jmc-blue focus:border-jmc-blue flex-1 block w-full rounded-l-md sm:text-sm border-gray-300 border p-2.5 outline-none" placeholder="Leia o código...">
+                            <button onclick="buscarPorCodigoEan()" id="btnBuscaCodigoEan" class="bg-jmc-blue text-white px-5 py-2.5 rounded-r-md hover:bg-opacity-90 font-semibold transition-colors">Buscar</button>
                         </div>
                     </div>
+
+                    <!-- Por Código Interno -->
                     <div>
-                        <label for="buscaCodigo" class="block text-sm font-medium text-gray-700">Por Código do
-                            Sistema</label>
-                        <div class="mt-1 flex rounded-md shadow-sm">
-                            <input type="text" id="buscaCodigo"
-                                class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border-gray-300 p-2"
-                                placeholder="Digite o código do sistema">
-                            <button onclick="buscarPorCodigo()" id="btnBuscaCodigo"
-                                class="bg-blue-600 text-white px-4 py-2 rounded-r-md hover:bg-blue-700 font-semibold">Buscar</button>
+                        <label for="buscaCodigo" class="block text-sm font-semibold text-gray-700 mb-1">Por Código do Sistema</label>
+                        <div class="flex rounded-md shadow-sm">
+                            <input type="text" id="buscaCodigo" class="focus:ring-jmc-blue focus:border-jmc-blue flex-1 block w-full rounded-l-md sm:text-sm border-gray-300 border p-2.5 outline-none" placeholder="Digite o código...">
+                            <button onclick="buscarPorCodigo()" id="btnBuscaCodigo" class="bg-jmc-blue text-white px-5 py-2.5 rounded-r-md hover:bg-opacity-90 font-semibold transition-colors">Buscar</button>
                         </div>
                     </div>
+
+                    <!-- Por Referência -->
                     <div>
-                        <label for="buscaRef" class="block text-sm font-medium text-gray-700">Por Referência</label>
-                        <div class="mt-1 flex rounded-md shadow-sm">
-                            <input type="text" id="buscaRef"
-                                class="focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border-gray-300 p-2"
-                                placeholder="Ex: 61211">
-                            <button onclick="buscarPorReferencia()" id="btnBuscaRef"
-                                class="bg-blue-600 text-white px-4 py-2 rounded-r-md hover:bg-blue-700 font-semibold">Buscar</button>
+                        <label for="buscaRef" class="block text-sm font-semibold text-gray-700 mb-1">Por Referência</label>
+                        <div class="flex rounded-md shadow-sm">
+                            <input type="text" id="buscaRef" class="focus:ring-jmc-blue focus:border-jmc-blue flex-1 block w-full rounded-l-md sm:text-sm border-gray-300 border p-2.5 outline-none" placeholder="Ex: 61211">
+                            <button onclick="buscarPorReferencia()" id="btnBuscaRef" class="bg-jmc-blue text-white px-5 py-2.5 rounded-r-md hover:bg-opacity-90 font-semibold transition-colors">Buscar</button>
                         </div>
                     </div>
                 </div>
-                <div class="mt-4 flex justify-center">
-                    <button onclick="limparBusca()" id="btnLimparBusca"
-                        class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 font-semibold">
-                        Limpar Busca
+
+                <div class="mt-8 flex justify-center">
+                    <button onclick="limparBusca()" id="btnLimparBusca" class="text-red-600 bg-red-50 hover:bg-red-100 border border-red-200 px-6 py-2 rounded-md font-semibold transition-colors">
+                        Limpar Todos os Campos
                     </button>
                 </div>
             </div>
-            <div id="resultados">
-                <div id="feedback" class="text-center text-gray-500 py-10 bg-white rounded-lg shadow-md">
-                    <p>Utilize os campos acima para buscar um produto.</p>
+
+            <!-- Área de Resultados Dinâmica -->
+            <div id="resultados" class="mt-8 max-w-4xl mx-auto">
+                <div id="feedback" class="text-center text-gray-500 py-12 bg-white rounded-xl shadow-sm border border-gray-100">
+                    <svg class="mx-auto h-12 w-12 text-gray-300 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <p class="text-lg">Utilize os campos acima para buscar um produto.</p>
                 </div>
             </div>
-        </main>
-    </div>
+        </section>
+
+        <!-- SEÇÃO: FERRAMENTAS DE CÁLCULO (CARDS) -->
+        <section id="ferramentas" class="scroll-mt-24">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-jmc-blue uppercase tracking-wide">Ferramentas de Cálculo</h2>
+                <div class="w-24 h-1 bg-jmc-orange mx-auto mt-3 rounded"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Card 1: Forro -->
+                <div class="bg-white rounded-xl p-8 text-center shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 group hover:scale-105">
+                    <div class="w-20 h-20 mx-auto bg-gray-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-jmc-blue transition-colors">
+                        <span class="text-4xl">📏</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Calculadora de Forro PVC</h3>
+                    <p class="text-gray-500 mb-6 text-sm">Calcule a metragem, quantidade de talas, rodaforro e acabamentos com precisão.</p>
+                    <a href="funcoes/forro.html" class="inline-block border-2 border-jmc-blue text-jmc-blue hover:bg-jmc-blue hover:text-white font-bold py-2 px-6 rounded transition-colors w-full">Acessar Calculadora</a>
+                </div>
+
+                <!-- Card 2: Cabos -->
+                <div class="bg-white rounded-xl p-8 text-center shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 group hover:scale-105">
+                    <div class="w-20 h-20 mx-auto bg-gray-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-jmc-blue transition-colors">
+                        <span class="text-4xl">⚖️</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Medição de Cabos</h3>
+                    <p class="text-gray-500 mb-6 text-sm">Descubra a quantidade aproximada de metros restantes em um rolo através do peso.</p>
+                    <a href="funcoes/cabos.html" class="inline-block border-2 border-jmc-blue text-jmc-blue hover:bg-jmc-blue hover:text-white font-bold py-2 px-6 rounded transition-colors w-full">Acessar Calculadora</a>
+                </div>
+
+                <!-- Card 3: Laje (Futuro) -->
+                <div class="bg-white rounded-xl p-8 text-center shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 group">
+                    <div class="w-20 h-20 mx-auto bg-gray-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-gray-200 transition-colors">
+                        <span class="text-4xl opacity-50">🧱</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-400 mb-3">Cálculo de Laje</h3>
+                    <p class="text-gray-400 mb-6 text-sm">Cálculo de quantidade de longarinas e blocos de isopor/cerâmica.</p>
+                    <button disabled class="inline-block border-2 border-gray-200 text-gray-400 font-bold py-2 px-6 rounded w-full cursor-not-allowed">Em Breve</button>
+                </div>
+                <!-- Card 4: Orçamento (Futuro) -->
+                <div id="orcamento" class="bg-white rounded-xl p-8 text-center shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 group">
+                    <div class="w-20 h-20 mx-auto bg-gray-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-gray-200 transition-colors">
+                        <span class="text-4xl opacity-50">🧱</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-400 mb-3">Orçamento</h3>
+                    <p class="text-gray-400 mb-6 text-sm">Orçamento com os produtos do catálogo.</p>
+                    <button disabled class="inline-block border-2 border-gray-200 text-gray-400 font-bold py-2 px-6 rounded w-full cursor-not-allowed">Em Breve</button>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer class="bg-jmc-blue text-gray-400 py-8 border-t border-gray-700 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p>&copy; 2026 JMC Estoque. Sistema Interno.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
     <script src="script/script.js"></script>
     <script src="script/sw.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/script/sw.js')
-                    .then(registration => {
-                        console.log('Service Worker registrado com sucesso:', registration.scope);
-                    })
-                    .catch(error => {
-                        console.log('Falha ao registrar o Service Worker:', error);
-                    });
+                    .then(registration => console.log('SW Registrado:', registration.scope))
+                    .catch(error => console.log('Falha no SW:', error));
             });
         }
     </script>

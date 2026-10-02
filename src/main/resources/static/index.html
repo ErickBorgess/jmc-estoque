@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JMC Estoque & Cálculos</title>
+    <title>JMC Estoque</title>
     <link rel="icon" type="image/png" href="images/favicon.ico">
     <link rel="manifest" href="images/site.webmanifest" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -24,8 +24,9 @@
                         jmc: {
                             blue: '#0A2540',
                             orange: '#FF6600',
-                            orangeHover: '#E55C00',
-                            light: '#F8F9FA'
+                            orangeHover: '#F08D0C',
+                            light: '#F8F9FA',
+                            yellow: '#F0C50C'
                         }
                     }
                 }
@@ -54,13 +55,13 @@
                 <!-- Logo e Título -->
                 <div class="flex items-center gap-3">
                     <img src="images/logo-jmc.png" alt="Logo Jairinho" class="h-12 w-auto object-contain rounded p-1">
-                    <span class="font-bold text-xl tracking-tight hidden md:block">Jairinho Materiais</span>
+                    <span class="font-bold text-xl tracking-tight hidden md:block">Jairinho Materiais de Construção</span>
                 </div>
                 <!-- Menu Desktop -->
                 <div class="hidden md:flex items-center space-x-8 font-medium">
                     <a href="#catalogo" class="hover:text-jmc-orange transition-colors">Catálogo</a>
                     <a href="#ferramentas" class="hover:text-jmc-orange transition-colors">Calculadoras</a>
-                    <a href="funcoes/upload.html" class="bg-jmc-orange hover:bg-jmc-orangeHover text-white px-5 py-2 rounded-md transition-all shadow-md">Área Restrita</a>
+                    <a href="funcoes/upload.html" class="bg-jmc-yellow hover:bg-jmc-orangeHover text-jmc-blue    px-5 py-2 rounded-md transition-all shadow-md">Área Restrita</a>
                 </div>
             </div>
         </div>
@@ -79,13 +80,13 @@
                 Acesse milhares de produtos com busca inteligente e utilize nossas calculadoras nativas para otimizar os orçamentos no balcão.
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#catalogo" class="bg-jmc-orange hover:bg-jmc-orangeHover text-white font-bold py-3 px-8 rounded-md transition-all shadow-lg text-lg">
+                <a href="#catalogo" class="bg-jmc-yellow hover:bg-jmc-orangeHover hover:text-jmc-blue text-jmc-blue font-bold py-3 px-8 rounded-md transition-all shadow-lg text-lg">
                     Explorar Catálogo
                 </a>
                 <!--<a href="#orcamento" class="bg-jmc-orange hover:bg-jmc-orangeHover text-white font-bold py-3 px-8 rounded-md transition-all shadow-lg text-lg">
                     Orçamento
                 </a>-->
-                <a href="#ferramentas" class="bg-jmc-orange bg hover:bg-white hover:text-jmc-blue text-white font-bold py-3 px-8 rounded-md transition-all text-lg">
+                <a href="#ferramentas" class="bg-jmc-yellow bg hover:bg-jmc-orangeHover hover:text-jmc-blue text-jmc-blue font-bold py-3 px-8 rounded-md transition-all text-lg">
                     Acessar Ferramentas
                 </a>
             </div>

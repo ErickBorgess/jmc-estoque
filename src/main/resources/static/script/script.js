@@ -134,6 +134,7 @@ const limparBusca = () => {
     inputCodigoEan.value = ''
     inputCodigo.value = ''
     inputRef.value = ''
+    resultadosDiv.innerHTML = ''
 };
 
 // --- EVENTOS DOS BOTÕES E TECLA ENTER ---
